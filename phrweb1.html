@@ -1,0 +1,139 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>DeepSeek vs ChatGPT — Article</title>
+  <meta name="description" content="Responsive article layout similar to screenshot: clean, mobile-first, smooth reading experience.">
+  <style>
+    :root{--accent:#0b76ff;--muted:#6b7280;--card:#ffffff;--bg:#f7f8fb}
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;line-height:1.5;background:var(--bg);color:#111}/* Header */
+.site-header{background:linear-gradient(90deg,var(--accent),#6b21a8);color:white;padding:14px 16px;display:flex;align-items:center;gap:12px}
+.brand{font-weight:700;letter-spacing:.4px}
+.menu-btn{margin-left:auto;background:transparent;border:0;color:rgba(255,255,255,.95);font-size:20px}
+
+/* Container */
+.container{max-width:900px;margin:18px auto;padding:0 16px}
+.hero{background:white;border-radius:14px;padding:22px;margin-bottom:18px;box-shadow:0 6px 18px rgba(16,24,40,.06)}
+.kicker{color:var(--muted);font-size:13px}
+h1{font-size:22px;margin:8px 0}
+.meta{color:var(--muted);font-size:13px;margin-bottom:8px}
+
+/* Article content */
+article{background:white;border-radius:12px;padding:20px 22px;box-shadow:0 6px 18px rgba(16,24,40,.04)}
+article p{color:#374151;margin:14px 0}
+ul.bullets{padding-left:20px;margin:12px 0;color:#374151}
+.section-title{font-weight:700;margin-top:18px}
+
+/* Pros / Cons column style (stack on mobile) */
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.card{background:#fafafa;border-radius:10px;padding:12px}
+
+/* CTA */
+.cta{display:inline-block;margin:18px 0;padding:12px 18px;border-radius:999px;background:var(--accent);color:white;text-decoration:none;box-shadow:0 6px 18px rgba(11,118,255,.12)}
+
+/* Sticky reading progress / circular widget */
+.reading-widget{position:fixed;right:16px;bottom:70px;width:72px;height:72px;border-radius:50%;display:flex;align-items:center;justify-content:center;z-index:60}
+.ring{position:absolute;inset:0;border-radius:50%;background:conic-gradient(#ec4899 var(--p), #06b6d4 0 100%);display:flex;align-items:center;justify-content:center;box-shadow:0 6px 20px rgba(8,9,11,.12)}
+.ring .num{position:relative;font-weight:700;color:#111;background:white;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+
+/* back-to-top */
+.to-top{position:fixed;right:20px;bottom:6px;background:linear-gradient(180deg,#0b76ff,#6b21a8);color:white;padding:12px;border-radius:12px;border:0;z-index:60}
+
+/* Responsive */
+@media (max-width:700px){
+  .grid-2{grid-template-columns:1fr}
+  h1{font-size:20px}
+  .brand{font-size:16px}
+  .reading-widget{right:12px;bottom:86px}
+}
+
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="brand">PrgWebTech</div>
+    <button class="menu-btn" aria-label="menu">☰</button>
+  </header>  <main class="container">
+    <section class="hero" role="banner">
+      <div class="kicker">ARTIFICIAL INTELLIGENCE</div>
+      <h1>Which is Better — ChatGPT or DeepSeek?</h1>
+      <div class="meta">By Prathamesh Gad · Feb 2, 2025</div>
+      <a class="cta" href="#article">Read the comparison</a>
+    </section><article id="article" role="article">
+  <p>
+    With the rapid advancements in AI, choosing the best AI-driven chatbot can be overwhelming. ChatGPT and DeepSeek are two powerful conversational models — this article highlights strengths, weaknesses, and use-cases for each.
+  </p>
+
+  <h2 class="section-title">Key features</h2>
+  <ul class="bullets">
+    <li><strong>Contextual Awareness:</strong> Maintains context over long conversations for coherent replies.</li>
+    <li><strong>Multi-Language Support:</strong> Useful for global users.</li>
+    <li><strong>Real-Time Interaction:</strong> Suitable for chatbots and live customer support.</li>
+  </ul>
+
+  <div class="grid-2">
+    <div class="card">
+      <h3 style="margin:0 0 8px 0">Pros</h3>
+      <ul class="bullets">
+        <li>Generates human-like text for diverse applications.</li>
+        <li>Versatile: content creation, coding, translation.</li>
+        <li>User-friendly and accessible for non-technical users.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3 style="margin:0 0 8px 0">Cons</h3>
+      <ul class="bullets">
+        <li>Limited knowledge cutoff (may miss very recent events).</li>
+        <li>May produce inaccurate or biased information.</li>
+        <li>Requires monitoring to avoid misuse.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2 class="section-title">DeepSeek highlights</h2>
+  <p>DeepSeek focuses on data analytics and enterprise integration. Its strengths include customizability, scalability, and real-time processing for large datasets.</p>
+
+  <h2 class="section-title">Security &amp; Privacy</h2>
+  <p>Both platforms can implement encryption and privacy measures — choose the vendor and settings that meet compliance requirements for your project.</p>
+
+  <p style="margin-top:18px">Want this exact layout with your brand colors, or a CMS-ready version (WordPress/Next.js)? Tell me and I will adapt it.</p>
+</article>
+
+  </main>  <!-- Floating circular progress / feedback widget -->  <div class="reading-widget" aria-hidden="true">
+    <div class="ring" id="ring" style="--p:0deg"></div>
+    <div class="num">0</div>
+  </div><button class="to-top" id="toTop" title="Back to top">↑</button>
+
+  <script>
+    // Reading progress — updates ring and center number by scroll
+    const ring = document.getElementById('ring');
+    const num = document.querySelector('.num');
+    const article = document.getElementById('article');
+    function updateProgress(){
+      const rect = article.getBoundingClientRect();
+      const total = article.scrollHeight - window.innerHeight + rect.top;
+      const scrolled = Math.min(Math.max(window.scrollY - (article.offsetTop - 20), 0), article.scrollHeight);
+      const pct = Math.round((scrolled / article.scrollHeight) * 100);
+      const angle = Math.min(Math.max(pct,0),100) * 3.6;
+      ring.style.setProperty('--p', angle + 'deg');
+      num.textContent = pct;
+    }
+    window.addEventListener('scroll', updateProgress);
+    window.addEventListener('resize', updateProgress);
+    updateProgress();
+
+    // Back to top
+    document.getElementById('toTop').addEventListener('click', ()=>{
+      window.scrollTo({top:0,behavior:'smooth'});
+    });
+
+    // Smooth anchor for read button
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', e=>{e.preventDefault();document.querySelector(a.getAttribute('href')).scrollIntoView({behavior:'smooth'});});
+    });
+  </script>
+</body></html>
