@@ -1,1 +1,1001 @@
-# royprpritam-collab.github.io
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NewsHub - Latest News Aggregator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3763015193546549" crossorigin="anonymous"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --gray: #95a5a6;
+            --success: #2ecc71;
+        }
+
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo i {
+            font-size: 28px;
+            color: var(--secondary);
+        }
+
+        .logo h1 {
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .search-bar {
+            display: flex;
+            width: 40%;
+        }
+
+        .search-bar input {
+            flex: 1;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px 0 0 4px;
+            font-size: 16px;
+        }
+
+        .search-bar button {
+            background: var(--secondary);
+            color: white;
+            border: none;
+            padding: 0 15px;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+        }
+
+        .user-actions a {
+            color: white;
+            margin-left: 15px;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        /* Navigation */
+        nav {
+            background-color: var(--dark);
+            padding: 10px 0;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary);
+        }
+
+        .nav-links a.active {
+            color: var(--secondary);
+        }
+
+        /* Ad Banner Styles */
+        .ad-banner {
+            background: #f8f9fa;
+            border: 1px dashed #ddd;
+            padding: 15px;
+            text-align: center;
+            margin: 20px 0;
+            border-radius: 8px;
+            color: #666;
+        }
+
+        .ad-banner.horizontal {
+            height: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .ad-banner.vertical {
+            height: 600px;
+            width: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .ad-banner.square {
+            height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Main Content */
+        .main-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        /* Featured News */
+        .featured-news {
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--secondary);
+        }
+
+        .section-title h2 {
+            font-size: 22px;
+            color: var(--primary);
+        }
+
+        .view-all {
+            color: var(--secondary);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .featured-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+        }
+
+        .main-featured {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .main-featured img {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .main-featured:hover img {
+            transform: scale(1.05);
+        }
+
+        .featured-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            color: white;
+            padding: 20px;
+        }
+
+        .featured-content h3 {
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+
+        .featured-meta {
+            display: flex;
+            gap: 15px;
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .side-featured {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .side-news {
+            display: flex;
+            gap: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .side-news:last-child {
+            border-bottom: none;
+        }
+
+        .side-news img {
+            width: 100px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+
+        .side-news-content h4 {
+            font-size: 15px;
+            margin-bottom: 5px;
+        }
+
+        .side-news-content .meta {
+            font-size: 12px;
+            color: var(--gray);
+        }
+
+        /* News Grid */
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .news-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .news-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .news-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .news-card-content {
+            padding: 15px;
+        }
+
+        .news-card-content h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .news-card-content p {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        .news-card-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: var(--gray);
+        }
+
+        /* Sidebar */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .trending-news, .categories, .newsletter {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+        }
+
+        .trending-list {
+            list-style: none;
+        }
+
+        .trending-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .trending-list li:last-child {
+            border-bottom: none;
+        }
+
+        .trending-number {
+            background: var(--secondary);
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .trending-content h4 {
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .trending-content .meta {
+            font-size: 12px;
+            color: var(--gray);
+        }
+
+        .categories-list {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .categories-list a {
+            background: var(--light);
+            padding: 8px 15px;
+            border-radius: 20px;
+            text-decoration: none;
+            color: var(--dark);
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .categories-list a:hover {
+            background: var(--secondary);
+            color: white;
+        }
+
+        .newsletter p {
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        .newsletter-form {
+            display: flex;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px 0 0 4px;
+        }
+
+        .newsletter-form button {
+            background: var(--secondary);
+            color: white;
+            border: none;
+            padding: 0 15px;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary);
+            color: white;
+            padding: 40px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-column h3 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--secondary);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .social-links a {
+            color: white;
+            background: rgba(255, 255, 255, 0.1);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 14px;
+            color: #ccc;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .featured-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .news-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .ad-banner.vertical {
+                width: 100%;
+                height: 250px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .search-bar {
+                width: 100%;
+            }
+            
+            .nav-links {
+                overflow-x: auto;
+                padding-bottom: 10px;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-newspaper"></i>
+                    <h1>NewsHub</h1>
+                </div>
+                <div class="search-bar">
+                    <input type="text" placeholder="Search for news...">
+                    <button><i class="fas fa-search"></i></button>
+                </div>
+                <div class="user-actions">
+                    <a href="#"><i class="fas fa-bookmark"></i> Saved</a>
+                    <a href="#"><i class="fas fa-bell"></i> Alerts</a>
+                    <a href="#"><i class="fas fa-user"></i> Sign In</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Top Ad Banner -->
+    <div class="container">
+        <div class="ad-banner horizontal">
+            <!-- Google AdSense Horizontal Banner -->
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-3763015193546549"
+                 data-ad-slot="1234567890"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <ul class="nav-links">
+                <li><a href="#" class="active"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="#"><i class="fas fa-globe"></i> World</a></li>
+                <li><a href="#"><i class="fas fa-chart-line"></i> Business</a></li>
+                <li><a href="#"><i class="fas fa-flask"></i> Technology</a></li>
+                <li><a href="#"><i class="fas fa-heartbeat"></i> Health</a></li>
+                <li><a href="#"><i class="fas fa-basketball-ball"></i> Sports</a></li>
+                <li><a href="#"><i class="fas fa-film"></i> Entertainment</a></li>
+                <li><a href="#"><i class="fas fa-science"></i> Science</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="main-content">
+            <!-- Left Content -->
+            <div class="left-content">
+                <!-- Featured News -->
+                <section class="featured-news">
+                    <div class="section-title">
+                        <h2>Featured News</h2>
+                        <a href="#" class="view-all">View All <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    <div class="featured-grid">
+                        <div class="main-featured">
+                            <img src="https://images.unsplash.com/photo-1588681664899-f142ff2dc9b1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" alt="Breaking News">
+                            <div class="featured-content">
+                                <h3>Global Summit Addresses Climate Change Crisis</h3>
+                                <div class="featured-meta">
+                                    <span><i class="far fa-clock"></i> 2 hours ago</span>
+                                    <span><i class="far fa-eye"></i> 15.2k views</span>
+                                    <span><i class="far fa-comment"></i> 342 comments</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="side-featured">
+                            <div class="side-news">
+                                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Tech News">
+                                <div class="side-news-content">
+                                    <h4>New AI Model Breaks Performance Records</h4>
+                                    <div class="meta">Technology • 4 hours ago</div>
+                                </div>
+                            </div>
+                            <div class="side-news">
+                                <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Sports News">
+                                <div class="side-news-content">
+                                    <h4>National Team Wins Championship After 20 Years</h4>
+                                    <div class="meta">Sports • 6 hours ago</div>
+                                </div>
+                            </div>
+                            <div class="side-news">
+                                <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1171&q=80" alt="Health News">
+                                <div class="side-news-content">
+                                    <h4>Breakthrough in Cancer Research Shows Promise</h4>
+                                    <div class="meta">Health • 8 hours ago</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Mid-content Ad -->
+                <div class="ad-banner horizontal">
+                    <!-- Google AdSense Horizontal Banner -->
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-client="ca-pub-3763015193546549"
+                         data-ad-slot="1234567891"
+                         data-ad-format="auto"
+                         data-full-width-responsive="true"></ins>
+                    <script>
+                         (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                </div>
+
+                <!-- Latest News -->
+                <section class="latest-news">
+                    <div class="section-title">
+                        <h2>Latest News</h2>
+                        <a href="#" class="view-all">View All <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    <div class="news-grid">
+                        <div class="news-card">
+                            <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Economy News">
+                            <div class="news-card-content">
+                                <h3>Stock Markets Reach All-Time High Amid Economic Recovery</h3>
+                                <p>Global markets surged as economic indicators show strong recovery trends post-pandemic with technology and green energy sectors leading the way.</p>
+                                <div class="news-card-meta">
+                                    <span>Business • 1 hour ago</span>
+                                    <span><i class="far fa-bookmark"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="news-card">
+                            <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Space News">
+                            <div class="news-card-content">
+                                <h3>NASA Announces New Mission to Explore Jupiter's Moon</h3>
+                                <p>The space agency revealed plans for a groundbreaking mission to Europa, one of Jupiter's moons, to search for signs of extraterrestrial life.</p>
+                                <div class="news-card-meta">
+                                    <span>Science • 3 hours ago</span>
+                                    <span><i class="far fa-bookmark"></i></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Square Ad between news cards -->
+                        <div class="ad-banner square">
+                            <!-- Google AdSense Square Ad -->
+                            <ins class="adsbygoogle"
+                                 style="display:block"
+                                 data-ad-client="ca-pub-3763015193546549"
+                                 data-ad-slot="1234567892"
+                                 data-ad-format="auto"
+                                 data-full-width-responsive="true"></ins>
+                            <script>
+                                 (adsbygoogle = window.adsbygoogle || []).push({});
+                            </script>
+                        </div>
+
+                        <div class="news-card">
+                            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Real Estate News">
+                            <div class="news-card-content">
+                                <h3>Housing Market Shows Signs of Cooling After Record Highs</h3>
+                                <p>After months of unprecedented growth, the real estate market is beginning to stabilize as interest rates gradually increase.</p>
+                                <div class="news-card-meta">
+                                    <span>Economy • 5 hours ago</span>
+                                    <span><i class="far fa-bookmark"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="news-card">
+                            <img src="https://images.unsplash.com/photo-1511376777868-611b54f68947?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Tech News">
+                            <div class="news-card-content">
+                                <h3>Tech Giant Unveils Revolutionary Smartphone with Foldable Screen</h3>
+                                <p>The latest flagship device features an innovative flexible display that can transform from phone to tablet with seamless functionality.</p>
+                                <div class="news-card-meta">
+                                    <span>Technology • 7 hours ago</span>
+                                    <span><i class="far fa-bookmark"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <!-- Vertical Ad Banner -->
+                <div class="ad-banner vertical">
+                    <!-- Google AdSense Vertical Banner -->
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-client="ca-pub-3763015193546549"
+                         data-ad-slot="1234567893"
+                         data-ad-format="auto"
+                         data-full-width-responsive="true"></ins>
+                    <script>
+                         (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                </div>
+
+                <!-- Trending News -->
+                <div class="trending-news">
+                    <div class="section-title">
+                        <h2>Trending Now</h2>
+                    </div>
+                    <ul class="trending-list">
+                        <li>
+                            <div class="trending-number">1</div>
+                            <div class="trending-content">
+                                <h4>Major Political Shift in European Elections</h4>
+                                <div class="meta">Politics • 45k views</div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="trending-number">2</div>
+                            <div class="trending-content">
+                                <h4>Revolutionary Battery Technology Promises 7-Day Phone Charge</h4>
+                                <div class="meta">Technology • 38k views</div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="trending-number">3</div>
+                            <div class="trending-content">
+                                <h4>Celebrity Couple Announces Surprise Wedding</h4>
+                                <div class="meta">Entertainment • 32k views</div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="trending-number">4</div>
+                            <div class="trending-content">
+                                <h4>Breakthrough in Renewable Energy Storage</h4>
+                                <div class="meta">Science • 28k views</div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="trending-number">5</div>
+                            <div class="trending-content">
+                                <h4>Olympic Athlete Sets New World Record</h4>
+                                <div class="meta">Sports • 25k views</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Square Ad in sidebar -->
+                <div class="ad-banner square">
+                    <!-- Google AdSense Square Ad -->
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-client="ca-pub-3763015193546549"
+                         data-ad-slot="1234567894"
+                         data-ad-format="auto"
+                         data-full-width-responsive="true"></ins>
+                    <script>
+                         (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                </div>
+
+                <!-- Categories -->
+                <div class="categories">
+                    <div class="section-title">
+                        <h2>Categories</h2>
+                    </div>
+                    <ul class="categories-list">
+                        <li><a href="#">World</a></li>
+                        <li><a href="#">Politics</a></li>
+                        <li><a href="#">Business</a></li>
+                        <li><a href="#">Technology</a></li>
+                        <li><a href="#">Health</a></li>
+                        <li><a href="#">Entertainment</a></li>
+                        <li><a href="#">Sports</a></li>
+                        <li><a href="#">Science</a></li>
+                        <li><a href="#">Education</a></li>
+                        <li><a href="#">Travel</a></li>
+                        <li><a href="#">Food</a></li>
+                        <li><a href="#">Style</a></li>
+                    </ul>
+                </div>
+
+                <!-- Newsletter -->
+                <div class="newsletter">
+                    <div class="section-title">
+                        <h2>Newsletter</h2>
+                    </div>
+                    <p>Subscribe to our daily newsletter and stay updated with the latest news.</p>
+                    <div class="newsletter-form">
+                        <input type="email" placeholder="Your email address">
+                        <button><i class="fas fa-paper-plane"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Ad Banner -->
+    <div class="container">
+        <div class="ad-banner horizontal">
+            <!-- Google AdSense Horizontal Banner -->
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-3763015193546549"
+                 data-ad-slot="1234567895"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>About NewsHub</h3>
+                    <p>NewsHub is a leading news aggregator that brings you the latest and most important stories from around the world, updated 24/7.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Careers</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Categories</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">World News</a></li>
+                        <li><a href="#">Business</a></li>
+                        <li><a href="#">Technology</a></li>
+                        <li><a href="#">Sports</a></li>
+                        <li><a href="#">Entertainment</a></li>
+                        <li><a href="#">Health</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-map-marker-alt"></i> 123 News Street, Media City</li>
+                        <li><i class="fas fa-phone"></i> +1 234 567 8900</li>
+                        <li><i class="fas fa-envelope"></i> contact@newshub.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 NewsHub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple script to demonstrate functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Search functionality
+            const searchInput = document.querySelector('.search-bar input');
+            const searchButton = document.querySelector('.search-bar button');
+            
+            searchButton.addEventListener('click', function() {
+                if (searchInput.value.trim() !== '') {
+                    alert('Searching for: ' + searchInput.value);
+                    // In a real implementation, this would trigger a search
+                }
+            });
+            
+            searchInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    searchButton.click();
+                }
+            });
+            
+            // Newsletter subscription
+            const newsletterInput = document.querySelector('.newsletter-form input');
+            const newsletterButton = document.querySelector('.newsletter-form button');
+            
+            newsletterButton.addEventListener('click', function() {
+                if (newsletterInput.value.trim() !== '') {
+                    alert('Thank you for subscribing with: ' + newsletterInput.value);
+                    newsletterInput.value = '';
+                } else {
+                    alert('Please enter a valid email address');
+                }
+            });
+            
+            // Bookmark functionality
+            const bookmarkIcons = document.querySelectorAll('.fa-bookmark');
+            
+            bookmarkIcons.forEach(icon => {
+                icon.addEventListener('click', function() {
+                    this.classList.toggle('fas');
+                    this.classList.toggle('far');
+                    if (this.classList.contains('fas')) {
+                        alert('Article saved to your bookmarks');
+                    } else {
+                        alert('Article removed from your bookmarks');
+                    }
+                });
+            });
+            
+            // Simulate automatic news updates
+            setInterval(function() {
+                const timeElements = document.querySelectorAll('.news-card-meta span:first-child');
+                timeElements.forEach(element => {
+                    const text = element.textContent;
+                    if (text.includes('hour')) {
+                        const hours = parseInt(text.match(/\d+/)[0]);
+                        element.textContent = text.replace(hours, hours + 1);
+                    }
+                });
+                
+                // Show update notification
+                const notification = document.createElement('div');
+                notification.style.cssText = `
+                    position: fixed;
+                    bottom: 20px;
+                    right: 20px;
+                    background: var(--success);
+                    color: white;
+                    padding: 10px 20px;
+                    border-radius: 4px;
+                    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+                    z-index: 1000;
+                    font-size: 14px;
+                `;
+                notification.textContent = '📰 News updated just now!';
+                document.body.appendChild(notification);
+                
+                setTimeout(() => {
+                    notification.remove();
+                }, 3000);
+            }, 30000); // Update every 30 seconds for demonstration
+        });
+    </script>
+</body>
+</html>
