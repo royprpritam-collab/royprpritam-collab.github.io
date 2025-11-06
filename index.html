@@ -1,0 +1,834 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Fire Emotes &amp; Bundles - Official Redemption</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            color: white;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 20px 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .logo {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #FFD700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            margin-bottom: 10px;
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            color: #f0f0f0;
+            margin-bottom: 15px;
+        }
+        
+        .ad-container {
+            width: 100%;
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .ad-banner {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px dashed rgba(255, 255, 255, 0.3);
+            height: 90px;
+            width: 728px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 14px;
+            border-radius: 5px;
+        }
+        
+        .main-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .emotes-section, .bundles-section {
+            flex: 1;
+            min-width: 300px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .section-title {
+            font-size: 1.8rem;
+            color: #FFD700;
+            margin-bottom: 20px;
+            text-align: center;
+            border-bottom: 2px solid #FFD700;
+            padding-bottom: 10px;
+        }
+        
+        .emote-grid, .bundle-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+        }
+        
+        .emote-card, .bundle-card {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+        
+        .emote-card:hover, .bundle-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+        }
+        
+        .emote-img, .bundle-img {
+            width: 100%;
+            height: 120px;
+            background-color: #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+        }
+        
+        .emote-name, .bundle-name {
+            padding: 10px;
+            text-align: center;
+            font-weight: bold;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        
+        .price-tag {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 10px;
+            background-color: rgba(0, 0, 0, 0.3);
+        }
+        
+        .original-price {
+            text-decoration: line-through;
+            color: #ff6b6b;
+        }
+        
+        .discount-price {
+            color: #4cd964;
+            font-weight: bold;
+        }
+        
+        .new-badge {
+            background-color: #ff4757;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+        
+        .redeem-btn {
+            display: block;
+            width: 100%;
+            padding: 8px;
+            background: linear-gradient(to right, #FF416C, #FF4B2B);
+            border: none;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .redeem-btn:hover {
+            background: linear-gradient(to right, #FF4B2B, #FF416C);
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f);
+            width: 90%;
+            max-width: 500px;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            text-align: center;
+        }
+        
+        .modal-title {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #FFD700;
+        }
+        
+        .modal-img {
+            width: 150px;
+            height: 150px;
+            background-color: #333;
+            margin: 0 auto 20px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+        }
+        
+        .input-group {
+            margin-bottom: 20px;
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            text-align: left;
+            font-weight: bold;
+        }
+        
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            border-radius: 5px;
+            border: none;
+            background-color: rgba(255, 255, 255, 0.9);
+            font-size: 16px;
+        }
+        
+        .submit-btn {
+            background: linear-gradient(to right, #00b09b, #96c93d);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 18px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+            font-weight: bold;
+            width: 100%;
+        }
+        
+        .submit-btn:hover {
+            background: linear-gradient(to right, #96c93d, #00b09b);
+        }
+        
+        .success-message {
+            display: none;
+            background-color: rgba(0, 200, 0, 0.2);
+            border: 1px solid #00cc00;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 30px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            font-size: 0.9rem;
+            color: #ccc;
+        }
+        
+        @media (max-width: 768px) {
+            .ad-banner {
+                width: 100%;
+                height: 70px;
+            }
+            
+            .emote-grid, .bundle-grid {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">FREE FIRE EMOTES</div>
+            <div class="tagline">Official Redemption Portal - Get Your Favorite Emotes &amp; Bundles</div>
+        </header>
+        
+        <div class="ad-container">
+            <div class="ad-banner">
+                <!-- Ad Space - 728x90 -->
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3763015193546549" crossorigin="anonymous"></script>
+                <ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px" data-ad-client="ca-pub-3763015193546549" data-ad-slot="1234567890"></ins>
+                <script>
+                     (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+        </div>
+        
+        <div class="main-content">
+            <section class="emotes-section">
+                <h2 class="section-title">POPULAR EMOTES</h2>
+                <div class="emote-grid">
+                    <!-- Emote 1 -->
+                    <div class="emote-card" onclick="openRedeemModal('Dance Moves Emote', 799, 199)">
+                        <div class="emote-img">💃</div>
+                        <div class="emote-name">Dance Moves</div>
+                        <div class="price-tag">
+                            <span class="original-price">₹799</span>
+                            <span class="discount-price">₹199</span>
+                        </div>
+                        <button class="redeem-btn">REDEEM NOW</button>
+                    </div>
+                    
+                    <!-- Emote 2 -->
+                    <div class="emote-card" onclick="openRedeemModal('Laughing Emote', 799, 199)">
+                        <div class="emote-img">😂</div>
+                        <div class="emote-name">Laughing</div>
+                        <div class="price-tag">
+                            <span class="original-price">₹799</span>
+                            <span class="discount-price">₹199</span>
+                        </div>
+                        <button class="redeem-btn">REDEEM NOW</button>
+                    </div>
+                    
+                    <!-- Emote 3 -->
+                    <div class="emote-card" onclick="openRedeemModal('Victory Emote', 799, 199)">
+                        <div class="emote-img">✌️</div>
+                        <div class="emote-name">Victory</div>
+                        <div class="price-tag">
+                            <span class="original-price">₹799</span>
+                            <span class="discount-price">₹199</span>
+                        </div>
+                        <button class="redeem-btn">REDEEM NOW</button>
+                    </div>
+                    
+                    <!-- Emote 4 -->
+                    <div class="emote-card" onclick="openRedeemModal('Heart Emote', 799, 199)">
+                        <div class="emote-img">💖</div>
+                        <div class="emote-name">Heart</div>
+                        <div class="price-tag">
+                            <span class="original-price">₹799</span>
+                            <span class="discount-price">₹199</span>
+                        </div>
+                        <button class="redeem-btn">REDEEM NOW</button>
+                    </div>
+                    
+                    <!-- Emote 5 -->
+                    <div class="emote-card" onclick="openRedeemModal('Fire Emote', 799, 199)">
+                        <div class="emote-img">🔥</div>
+                        <div class="emote-name">Fire</div>
+                        <div class="price-tag">
+                            <span class="original-price">₹799</span>
+                            <span class="discount-price">₹199</span>
+                        </div>
+                        <button class="redeem-btn">REDEEM NOW</button>
+                    </div>
+                    
+                    <!-- Emote 6 -->
+                    <div class="emote-card" onclick="openRedeemModal('Shy Emote', 799, 199)">
+                        <div class="emote-img">😊</div>
+                        <div class="emote-name">Shy</div>
+                        <div class="price-tag">
+                            <span class="original-price">₹799</span>
+                            <span class="discount-price">₹199</span>
+                        </div>
+                        <button class="redeem-btn">REDEEM NOW</button>
+                    </div>
+                    
+                    <!-- Emote 7 -->
+                    <div class="emote-card" onclick="openRedeemModal('Angry Emote', 799, 199)">
+                        <div class="emote-img">😠</div>
+                        <div class="emote-name">Angry</div>
+                        <div class="price-tag">
+                            <span class="original-price">₹799</span>
+                            <span class="discount-price">₹199</span>
+                        </div>
+                        <button class="redeem-btn">REDEEM NOW</button>
+                    </div>
+                    
+                    <!-- Emote 8 -->
+                    <div class="emote-card" onclick="openRedeemModal('Cool Emote', 799, 199)">
+                        <div class="emote-img">😎</div>
+                        <div class="emote-name">Cool</div>
+                        <div class="price-tag">
+                            <span class="original-price">₹799</span>
+                            <span class="discount-price">₹199</span>
+                        </div>
+                        <button class="redeem-btn">REDEEM NOW</button>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="bundles-section">
+                <h2 class="section-title">EXCLUSIVE BUNDLES</h2>
+                <div class="bundle-grid">
+                    <!-- Bundle 1 -->
+                    <div class="bundle-card" onclick="openRedeemModal('Dragon Bundle', 599, 199)">
+                        <div class="new-badge">NEW</div>
+                        <div class="bundle-img">🐉</div>
+                        <div class="bundle-name">Dragon Bundle</div>
+                        <div class="price-tag">
+                            <span class="original-price">₹599</span>
+                            <span class="discount-price">₹199</span>
+                        </div>
+                        <button class="redeem-btn">REDEEM NOW</button>
+                    </div>
+                    
+                    <!-- Bundle 2 -->
+                    <div class="bundle-card" onclick="openRedeemModal('Winterlands Bundle', 599, 199)">
+                        <div class="bundle-img">❄️</div>
+                        <div class="bundle-name">Winterlands Bundle</div>
+                        <div class="price-tag">
+                            <span class="original-price">₹599</span>
+                            <span class="discount-price">₹199</span>
+                        </div>
+                        <button class="redeem-btn">REDEEM NOW</button>
+                    </div>
+                    
+                    <!-- Bundle 3 -->
+                    <div class="bundle-card" onclick="openRedeemModal('Cyberpunk Bundle', 599, 199)">
+                        <div class="bundle-img">🤖</div>
+                        <div class="bundle-name">Cyberpunk Bundle</div>
+                        <div class="price-tag">
+                            <span class="original-price">₹599</span>
+                            <span class="discount-price">₹199</span>
+                        </div>
+                        <button class="redeem-btn">REDEEM NOW</button>
+                    </div>
+                    
+                    <!-- Bundle 4 -->
+                    <div class="bundle-card" onclick="openRedeemModal('Glory Bundle', 599, 199)">
+                        <div class="bundle-img">🏆</div>
+                        <div class="bundle-name">Glory Bundle</div>
+                        <div class="price-tag">
+                            <span class="original-price">₹599</span>
+                            <span class="discount-price">₹199</span>
+                        </div>
+                        <button class="redeem-btn">REDEEM NOW</button>
+                    </div>
+                    
+                    <!-- Bundle 5 -->
+                    <div class="bundle-card" onclick="openRedeemModal('Assassin Bundle', 599, 199)">
+                        <div class="bundle-img">🗡️</div>
+                        <div class="bundle-name">Assassin Bundle</div>
+                        <div class="price-tag">
+                            <span class="original-price">₹599</span>
+                            <span class="discount-price">₹199</span>
+                        </div>
+                        <button class="redeem-btn">REDEEM NOW</button>
+                    </div>
+                    
+                    <!-- Bundle 6 -->
+                    <div class="bundle-card" onclick="openRedeemModal('Royal Bundle', 599, 199)">
+                        <div class="bundle-img">👑</div>
+                        <div class="bundle-name">Royal Bundle</div>
+                        <div class="price-tag">
+                            <span class="original-price">₹599</span>
+                            <span class="discount-price">₹199</span>
+                        </div>
+                        <button class="redeem-btn">REDEEM NOW</button>
+                    </div>
+                </div>
+            </section>
+        </div>
+        
+        <div class="ad-container">
+            <div class="ad-banner">
+                <!-- Ad Space - 728x90 -->
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3763015193546549" crossorigin="anonymous"></script>
+                <ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px" data-ad-client="ca-pub-3763015193546549" data-ad-slot="0987654321"></ins>
+                <script>
+                     (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+        </div>
+        
+        <footer>
+            <p>This is an unofficial fan site. Free Fire is a registered trademark of Garena International. We are not affiliated with Garena.</p>
+            <p>© 2023 Free Fire Emotes Redemption. All rights reserved.</p>
+        </footer>
+    </div>
+    
+    <!-- Redeem Modal -->
+    <div class="modal" id="redeemModal">
+        <div class="modal-content">
+            <h2 class="modal-title">REDEEM YOUR ITEM</h2>
+            <div class="modal-img" id="modalEmoteImg">💃</div>
+            <p>You are redeeming: <strong id="selectedItem">Dance Moves Emote</strong></p>
+            <p>Price: <span id="itemPrice" style="color: #4cd964; font-weight: bold;">₹199</span></p>
+            
+            <div class="input-group">
+                <label for="uid">ENTER YOUR FREE FIRE UID:</label>
+                <input type="text" id="uid" placeholder="e.g., 1234567890">
+            </div>
+            
+            <button class="submit-btn" onclick="redeemItem()">REDEEM NOW</button>
+            
+            <div class="success-message" id="successMessage">
+                <h3>SUCCESSFULLY REDEEMED!</h3>
+                <p>Your item <strong id="redeemedItem">Dance Moves Emote</strong> is being processed.</p>
+                <p>It may take up to <strong>24 hours</strong> to appear in your account.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Function to open the redeem modal
+        function openRedeemModal(itemName, originalPrice, discountPrice) {
+            document.getElementById('selectedItem').textContent = itemName;
+            document.getElementById('redeemedItem').textContent = itemName;
+            document.getElementById('itemPrice').textContent = `₹${discountPrice}`;
+            
+            // Set appropriate emoji based on item name
+            const emoteImg = document.getElementById('modalEmoteImg');
+            if (itemName.includes('Dance')) emoteImg.innerHTML = '💃';
+            else if (itemName.includes('Laugh')) emoteImg.innerHTML = '😂';
+            else if (itemName.includes('Victory')) emoteImg.innerHTML = '✌️';
+            else if (itemName.includes('Heart')) emoteImg.innerHTML = '💖';
+            else if (itemName.includes('Fire')) emoteImg.innerHTML = '🔥';
+            else if (itemName.includes('Shy')) emoteImg.innerHTML = '😊';
+            else if (itemName.includes('Angry')) emoteImg.innerHTML = '😠';
+            else if (itemName.includes('Cool')) emoteImg.innerHTML = '😎';
+            else if (itemName.includes('Dragon')) emoteImg.innerHTML = '🐉';
+            else if (itemName.includes('Winter')) emoteImg.innerHTML = '❄️';
+            else if (itemName.includes('Cyber')) emoteImg.innerHTML = '🤖';
+            else if (itemName.includes('Glory')) emoteImg.innerHTML = '🏆';
+            else if (itemName.includes('Assassin')) emoteImg.innerHTML = '🗡️';
+            else if (itemName.includes('Royal')) emoteImg.innerHTML = '👑';
+            
+            document.getElementById('successMessage').style.display = 'none';
+            document.getElementById('redeemModal').style.display = 'flex';
+        }
+        
+        // Function to redeem the item
+        function redeemItem() {
+            const uid = document.getElementById('uid').value;
+            
+            if (!uid) {
+                alert('Please enter your Free Fire UID');
+                return;
+            }
+            
+            // Show success message
+            document.getElementById('successMessage').style.display = 'block';
+            
+            // Reset form after 5 seconds and close modal
+            setTimeout(function() {
+                document.getElementById('uid').value = '';
+                document.getElementById('redeemModal').style.display = 'none';
+            }, 5000);
+        }
+        
+        // Close modal when clicking outside of it
+        window.onclick = function(event) {
+            const modal = document.getElementById('redeemModal');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        }
+    </script>
+
+</body></html>           <h3>Housing Market Shows Signs of Cooling After Record Highs</h3>
+                                <p>After months of unprecedented growth, the real estate market is beginning to stabilize as interest rates gradually increase.</p>
+                                <div class="news-card-meta">
+                                    <span>Economy • 5 hours ago</span>
+                                    <span><i class="far fa-bookmark"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="news-card">
+                            <img src="https://images.unsplash.com/photo-1511376777868-611b54f68947?ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=1170&amp;q=80" alt="Tech News">
+                            <div class="news-card-content">
+                                <h3>Tech Giant Unveils Revolutionary Smartphone with Foldable Screen</h3>
+                                <p>The latest flagship device features an innovative flexible display that can transform from phone to tablet with seamless functionality.</p>
+                                <div class="news-card-meta">
+                                    <span>Technology • 7 hours ago</span>
+                                    <span><i class="far fa-bookmark"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <!-- Vertical Ad Banner -->
+                <div class="ad-banner vertical">
+                    <!-- Google AdSense Vertical Banner -->
+                    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3763015193546549" data-ad-slot="1234567893" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                    <script>
+                         (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                </div>
+
+                <!-- Trending News -->
+                <div class="trending-news">
+                    <div class="section-title">
+                        <h2>Trending Now</h2>
+                    </div>
+                    <ul class="trending-list">
+                        <li>
+                            <div class="trending-number">1</div>
+                            <div class="trending-content">
+                                <h4>Major Political Shift in European Elections</h4>
+                                <div class="meta">Politics • 45k views</div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="trending-number">2</div>
+                            <div class="trending-content">
+                                <h4>Revolutionary Battery Technology Promises 7-Day Phone Charge</h4>
+                                <div class="meta">Technology • 38k views</div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="trending-number">3</div>
+                            <div class="trending-content">
+                                <h4>Celebrity Couple Announces Surprise Wedding</h4>
+                                <div class="meta">Entertainment • 32k views</div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="trending-number">4</div>
+                            <div class="trending-content">
+                                <h4>Breakthrough in Renewable Energy Storage</h4>
+                                <div class="meta">Science • 28k views</div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="trending-number">5</div>
+                            <div class="trending-content">
+                                <h4>Olympic Athlete Sets New World Record</h4>
+                                <div class="meta">Sports • 25k views</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Square Ad in sidebar -->
+                <div class="ad-banner square">
+                    <!-- Google AdSense Square Ad -->
+                    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3763015193546549" data-ad-slot="1234567894" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                    <script>
+                         (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                </div>
+
+                <!-- Categories -->
+                <div class="categories">
+                    <div class="section-title">
+                        <h2>Categories</h2>
+                    </div>
+                    <ul class="categories-list">
+                        <li><a href="#">World</a></li>
+                        <li><a href="#">Politics</a></li>
+                        <li><a href="#">Business</a></li>
+                        <li><a href="#">Technology</a></li>
+                        <li><a href="#">Health</a></li>
+                        <li><a href="#">Entertainment</a></li>
+                        <li><a href="#">Sports</a></li>
+                        <li><a href="#">Science</a></li>
+                        <li><a href="#">Education</a></li>
+                        <li><a href="#">Travel</a></li>
+                        <li><a href="#">Food</a></li>
+                        <li><a href="#">Style</a></li>
+                    </ul>
+                </div>
+
+                <!-- Newsletter -->
+                <div class="newsletter">
+                    <div class="section-title">
+                        <h2>Newsletter</h2>
+                    </div>
+                    <p>Subscribe to our daily newsletter and stay updated with the latest news.</p>
+                    <div class="newsletter-form">
+                        <input type="email" placeholder="Your email address">
+                        <button><i class="fas fa-paper-plane"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Ad Banner -->
+    <div class="container">
+        <div class="ad-banner horizontal">
+            <!-- Google AdSense Horizontal Banner -->
+            <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-3763015193546549" data-ad-slot="1234567895" data-ad-format="auto" data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>About NewsHub</h3>
+                    <p>NewsHub is a leading news aggregator that brings you the latest and most important stories from around the world, updated 24/7.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Careers</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Categories</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">World News</a></li>
+                        <li><a href="#">Business</a></li>
+                        <li><a href="#">Technology</a></li>
+                        <li><a href="#">Sports</a></li>
+                        <li><a href="#">Entertainment</a></li>
+                        <li><a href="#">Health</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-map-marker-alt"></i> 123 News Street, Media City</li>
+                        <li><i class="fas fa-phone"></i> +1 234 567 8900</li>
+                        <li><i class="fas fa-envelope"></i> contact@newshub.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>© 2023 NewsHub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple script to demonstrate functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Search functionality
+            const searchInput = document.querySelector('.search-bar input');
+            const searchButton = document.querySelector('.search-bar button');
+            
+            searchButton.addEventListener('click', function() {
+                if (searchInput.value.trim() !== '') {
+                    alert('Searching for: ' + searchInput.value);
+                    // In a real implementation, this would trigger a search
+                }
+            });
+            
+            searchInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    searchButton.click();
+                }
+            });
+            
+            // Newsletter subscription
+            const newsletterInput = document.querySelector('.newsletter-form input');
+            const newsletterButton = document.querySelector('.newsletter-form button');
+            
+            newsletterButton.addEventListener('click', function() {
+                if (newsletterInput.value.trim() !== '') {
+                    alert('Thank you for subscribing with: ' + newsletterInput.value);
+                    newsletterInput.value = '';
+                } else {
+                    alert('Please enter a valid email address');
+                }
+            });
+            
+            // Bookmark functionality
+            const bookmarkIcons = document.querySelectorAll('.fa-bookmark');
+            
+            bookmarkIcons.forEach(icon => {
+                icon.addEventListener('click', function() {
+                    this.classList.toggle('fas');
+                    this.classList.toggle('far');
+                    if (this.classList.contains('fas')) {
+                        alert('Article saved to your bookmarks');
+                    } else {
+                        alert('Article removed from your bookmarks');
+                    }
+                });
+            });
+            
+            // Simulate automatic news updates
+            setInterval(function() {
+                const timeElements = document.querySelectorAll('.news-card-meta span:first-child');
+                timeElements.forEach(element => {
+                    const text = element.textContent;
+                    if (text.includes('hour')) {
+                        const hours = parseInt(text.match(/\d+/)[0]);
+                        element.textContent = text.replace(hours, hours + 1);
+                    }
+                });
+                
+                // Show update notification
+                const notification = document.createElement('div');
+                notification.style.cssText = `
+                    position: fixed;
+                    bottom: 20px;
+                    right: 20px;
+                    background: var(--success);
+                    color: white;
+                    padding: 10px 20px;
+                    border-radius: 4px;
+                    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+                    z-index: 1000;
+                    font-size: 14px;
+                `;
+                notification.textContent = '📰 News updated just now!';
+                document.body.appendChild(notification);
+                
+                setTimeout(() => {
+                    notification.remove();
+                }, 3000);
+            }, 30000); // Update every 30 seconds for demonstration
+        });
+    </script>
+
+</body></html>
